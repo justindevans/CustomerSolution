@@ -1,0 +1,32 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.row {
+    padding-bottom: 10px !important;
+}
+
+.btn-grey {
+    background-color: #666666;
+    color: #ffffff;
+}
+
+.btn-grey:hover {
+    background-color: #333333;
+    color: #ffffff;
+}

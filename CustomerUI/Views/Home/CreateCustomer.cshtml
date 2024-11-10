@@ -1,0 +1,98 @@
+﻿@model CustomerAPI.Models.Customer
+
+@{
+    List<SelectListItem> titles = new List<SelectListItem>
+    {        
+        new SelectListItem { Value = "Mr", Text = "Mr" },
+        new SelectListItem { Value = "Mrs", Text = "Mrs" },
+        new SelectListItem { Value = "Miss", Text = "Miss" },
+        new SelectListItem { Value = "Ms", Text = "Ms" }
+    };    
+}
+
+<div class="panel-body" style="background-color:white; padding-left:15px; padding-right:15px; border: 0;">
+
+    <div class="form-group row">
+        <div class="col-md-12"><h4>Create New Customer</h4></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel massa quis est posuere maximus non et diam. Nulla facilisis orci in mauris suscipit, eget luctus nulla consequat. Nunc gravida justo interdum, scelerisque nunc ut, mollis tellus.
+        </div>
+    </div>
+    <div class="form-group row" style="margin-top:20px">
+
+        <div class="col-md-12">
+            <form asp-action="CreateCustomer" method="post">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <select asp-for="customerTitle" class="form-control" asp-items="titles">
+                            <option value="-1">-- Select Title --</option>
+                        </select>
+                        <span asp-validation-for="customerTitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input class="form-control input-sm customerFirstName" type="text" placeholder="First Name*" name="customerFirstName" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input class="form-control input-sm customerLastName" type="text" placeholder="Last Name*" name="customerLastName" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <b>Contact Details</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <input class="form-control input-sm customerEmail" type="email" placeholder="Email Address*" name="customerEmail" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input class="form-control input-sm customerTelephone" type="text" placeholder="Telephone No.*" name="customerTelephone" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5">
+                        <b>Address Details</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <input class="form-control input-sm customerAddr1" type="text" placeholder="Address Line 1" name="customerAddr1" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <input class="form-control input-sm customerAddr2" type="text" placeholder="Address Line 2" name="customerAddr2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <input class="form-control input-sm customerTown" type="text" placeholder="Town" name="customerTown" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <input class="form-control input-sm customerPostcode" type="text" placeholder="Postcode" name="customerPostcode" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-sm btn-success">Save</button>&nbsp;
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-sm btn-grey">Back</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<CustomerAPI.Models.Customer>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-body" style="background-color:white; padding-left:15px; padding-right:15px; border: 0;">
+
+    <div class="form-group row">
+        <div class="col-md-12"><h4>Customer Summary</h4></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel massa quis est posuere maximus non et diam. Nulla facilisis orci in mauris suscipit, eget luctus nulla consequat. Nunc gravida justo interdum, scelerisque nunc ut, mollis tellus.
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6" style="text-align:right">
+            <a href="@Url.Action("CreateCustomer", "Home")" class="btn btn-sm btn-primary">Add New Customer</a>
+        </div>
+    </div>
+
+    <div class="form-group row" style="margin-top:20px">
+
+        <div class="col-md-12">
+
+            <table class="table table-striped row-border compact table-responsive table-bordered" style="border-bottom: solid 1px #dddddd">
+                <thead>
+                    <tr>                       
+                        <th class="col-md-1">Title</th>
+                        <th class="col-md-2">First Name</th>
+                        <th class="col-md-2">Last Name</th>
+                        <th class="col-md-2">Email Addr.</th>
+                        <th class="col-md-2">Tel.</th>
+                        <th class="col-md-1">Address</th>
+                        <th class="col-md-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center">No customers found. Click 'Add New Customer'.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var customer in Model)
+                        {
+                            string? title = customer.customerTitle != "-1" ? customer.customerTitle : "";
+                            <tr>                                
+                                <td>@title</td>
+                                <td>@customer.customerFirstName</td>
+                                <td>@customer.customerLastName</td>
+                                <td>@customer.customerEmail</td>
+                                <td>@customer.customerTelephone</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-grey ViewAddressDetails" data-toggle="modal" data-target="#addressModal" data-customerAddr1="@customer.customerAddr1"
+                                            data-customerAddr2="@customer.customerAddr2"
+                                            data-customerTown="@customer.customerTown"
+                                            data-customerPostcode="@customer.customerPostcode">
+                                        Addr.
+                                    </button>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("EditCustomer", "Home", new { id = customer.customerId })" class="btn btn-sm btn-success">Edit</a>
+                                    <a href="@Url.Action("DeleteCustomer", "Home", new { id = customer.customerId })" class="btn btn-sm btn-danger" onclick="return confirmCustomerDelete()">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addressModalLabel">Customer Address</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table border="0" cellspacing="10">
+                                <tr>
+                                    <td style="font-weight:bold; padding-right:15px">Address Line 1:</td>
+                                    <td><span id="customerAddr1"></span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; padding-right:15px">Address Line 2:</td>
+                                    <td><span id="customerAddr2"></span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; padding-right:15px">Town:</td>
+                                    <td><span id="customerTown"></span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; padding-right:15px">Postcode:</td>
+                                    <td><span id="customerPostcode"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-grey" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
